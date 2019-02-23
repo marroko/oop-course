@@ -1,3 +1,0 @@
-/home/stud2017/7kieltyka/preoop/lab_5/ZBledami/CMakeFiles/edit_cache.dir
-/home/stud2017/7kieltyka/preoop/lab_5/ZBledami/CMakeFiles/rebuild_cache.dir
-/home/stud2017/7kieltyka/preoop/lab_5/ZBledami/CMakeFiles/lab01.dir
