@@ -6,12 +6,11 @@
 HEADERS = \
    $$PWD/Data.h \
    $$PWD/List.h \
-   $$PWD/Node.h
 
 SOURCES = \
    $$PWD/List.cpp \
    $$PWD/ltest.cpp \
-   $$PWD/Node.cpp
+    data.cpp
 
 INCLUDEPATH = \
     $$PWD/.

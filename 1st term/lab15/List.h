@@ -1,9 +1,23 @@
 #ifndef List_h
 #define List_h
 
-#include "Node.h"
 #include "Data.h"
-#include <iostream>
+
+struct Node {
+
+    Node(Data *insertData) : ptr(insertData) {}
+    Node() = default;
+
+    Node * whichNext() { return next; }
+    void setNext(Node *insertNode) { next = insertNode; }
+
+    const Node * whichNext() const { Node *tmp = next;
+                                     return tmp; }
+
+    Data *ptr;
+    Node *next = nullptr;
+
+};
 
 class List {
 
@@ -17,7 +31,7 @@ public:
 
     void print() const;
     List & insert(const Data &value, whereToInsert where = End);
-    const Node * find(const Data &value) const;
+    bool find(const Data &data) const;
 
 private:
 

@@ -4,14 +4,24 @@ List::List(const List &list) {
 
     if(list.head) {
 
-        const Node *ptr = list.head;
+        const Node *pointer = list.head;
 
-        while(ptr) {
+        while(pointer) {
 
-            insert(ptr->data());
-            ptr = ptr->whichNext();
-		}
-	}
+            Node *newNode = new Node;
+            newNode->ptr = pointer->ptr->copy();
+
+            if(head) {
+
+                tail->next = newNode;
+                tail = newNode;
+            }
+            else
+                head = tail = newNode;
+
+            pointer = pointer->next;
+        }
+    }
 }
 
 List::~List() {
@@ -29,24 +39,25 @@ List::~List() {
 
 List & List::insert(const Data &value, whereToInsert where) {
 
-    Node *inserted = new Node(value);
+    Node *newNode = new Node;
+    newNode->ptr = value.copy();
 
     if(head) {
 
         if(where == Begin) {
 
-            inserted->setNext(head);
-            head = inserted;
+            newNode->next = head;
+            head = newNode;
 
 		}
 		else {
 
-            tail->setNext(inserted);
-            tail = inserted;
+            tail->next = newNode;
+            tail = newNode;
 		}
 	}
 	else 
-        head = tail = inserted;
+        head = tail = newNode;
 
 	return *this;
 }
@@ -55,28 +66,32 @@ void List::print() const {
 
     std::cout << "[  ";
 
-    const Node *ptr = head;
+    const Node *pointerList = head;
 
-    while(ptr) {
+    while(pointerList) {
 
-        ptr->data().print();
-        ptr = ptr->whichNext();
+        pointerList->ptr->print();
+        pointerList = pointerList->next;
 	}
 
 	std::cout << "]\n";
 }
 
-//const Node * List::find(const Data &value) const {
+bool List::find(const Data &data) const {
 
-//    const Node *ptr = head;
+    bool ifFound = false;
+    Node *iterator = head;
 
-//    while(ptr) {
+    while(iterator)
+    {
+        if(iterator->ptr->equal(&data))
+        {
+            ifFound = true;
+            break;
+        }
 
-//        if(ptr->data() == value)
-//            return ptr;
+        iterator = iterator->next;
+    }
 
-//        ptr = ptr->whichNext();
-//	}
-
-//    return ptr;
-//}
+    return ifFound;
+}

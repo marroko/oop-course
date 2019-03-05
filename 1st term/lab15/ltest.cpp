@@ -26,13 +26,12 @@ int main() {
   a.print();
   std::cout << "Lista b" << std::endl;
   b.print();
-  // tu uruchamiaja sie destruktory
-  
-  // dla tych co sie nudza na zajeciach, (lub zad domowe)
-  // bool found = l.find( IntData(7) );
-  // std::cout << " found " << found << std::endl;
-  // found = l.find( StringData("7") );
-  // std::cout << " found " << found << std::end;l
+
+List l = b;
+bool found = l.find( IntData(7) );
+std::cout << " found " << found << std::endl;
+found = l.find( StringData("7") );
+std::cout << " found " << found << std::endl;
   
 }
 /* wyniki 

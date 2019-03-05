@@ -7,9 +7,11 @@ class Data {
 
 public:
 
-    Data() = default;
+    virtual ~Data() = default;
+
     virtual void print() const = 0;
-	virtual ~Data() = default;
+    virtual bool equal(const Data *dat) const = 0;
+    virtual Data * copy() const = 0;
 
 };
 
@@ -18,9 +20,11 @@ class IntData : public Data {
 public:
 
     IntData(int inserted) : value(inserted) {}
-	~IntData() { std::cout << "~IntData()\n"; }
+    virtual ~IntData() override { std::cout << "~IntData()\n"; }
 
-    virtual void print() const { std::cout << value << " "; }
+    virtual void print() const override { std::cout << value << " "; }
+    virtual bool equal(const Data *data) const override;
+    virtual IntData * copy() const override;
     int getValue() { return value; }
 
 private:
@@ -34,9 +38,11 @@ class FloatData : public Data {
 public:
 
     FloatData(float inserted) : value(inserted) {}
-    ~FloatData() { std::cout << "~FloatData()\n"; }
+    virtual ~FloatData() override { std::cout << "~FloatData()\n"; }
 
-    virtual void print() const { std::cout << value << " "; }
+    virtual void print() const override { std::cout << value << " "; }
+    virtual bool equal(const Data *data) const override;
+    virtual FloatData * copy() const override;
     float getValue() { return value; }
 
 private:
@@ -49,10 +55,12 @@ class StringData : public Data {
 
 public:
 
-    StringData(const char *inserted) : value(inserted) {}
-	~StringData() { std::cout << "~StringData()\n"; }
+    StringData(const std::string &inserted) : value(inserted) {}
+    virtual ~StringData() override { std::cout << "~StringData()\n"; }
 
-    virtual void print() const { std::cout << value << " "; }
+    virtual void print() const override { std::cout << value << " "; }
+    virtual bool equal(const Data *data) const override;
+    virtual StringData * copy() const override;
     std::string getValue() { return value; }
 
 private:
