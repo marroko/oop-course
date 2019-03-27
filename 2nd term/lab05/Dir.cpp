@@ -35,13 +35,38 @@ void Dir::operator+=(Element *e) {
 	e->setUpDirectory(this);
 }
 
-Element * Dir::get(std::string directory) {
+Element * Dir::get(std::string element) {
+
+	for(int j=0; j<countElements; ++j) {
+
+		if(subElements[j]->getName() == element)
+			return subElements[j];
+	}
+
+	Element *ptr = subElements[0]->get(element);
+
+	return ptr;
+}
+
+Dir * Dir::findDir(std::string name) {
+
+	Element *tmp = nullptr;
+	Dir *ptr = nullptr;
 
 	for(int i=0; i<countElements; ++i) {
 
-		if(subElements[i]->getName() == directory)
-			return subElements[i];
-	}
+		if(subElements[i]->getName() == name)
+			return dynamic_cast<Dir *>(subElements[i]);
+		else
+			tmp = subElements[i]->get(name);
 
-	return nullptr;
+		if(tmp)
+			ptr = dynamic_cast<Dir *>(tmp);
+	}
+	return ptr;
+}
+
+void Dir::add(Element *added) {
+
+	*this += added;
 }

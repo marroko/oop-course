@@ -14,9 +14,8 @@ public:
 	virtual ~Element() = default;
 
 	virtual void print(std::ostream &buffer, int spaces) const = 0;
-
+	virtual Element * get(std::string element) = 0;
 	void setUpDirectory(Element *element) { upDirectory = element; }
-
 	std::string getName() const { return name; }
 
 protected:
